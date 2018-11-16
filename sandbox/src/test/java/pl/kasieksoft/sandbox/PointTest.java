@@ -15,10 +15,10 @@ public class PointTest {
 
     @Test
     public void shouldCalculateDistanceFromNegativeCoordinates(){
-        Point point1 = new Point(0.0, -1.0);
-        Point point2 = new Point(-3.0, 3.0);
+        Point point1 = new Point(0.0, -10.0);
+        Point point2 = new Point(-5.0, 2.0);
 
-        Assert.assertEquals(point1.distance(point2),5.0);
+        Assert.assertEquals(point1.distance(point2),13.0);
     }
 
     @Test
