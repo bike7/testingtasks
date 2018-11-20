@@ -6,25 +6,25 @@ import org.testng.annotations.Test;
 public class PointTest {
 
     @Test
-    public void shouldCalculateDistance(){
+    public void shouldCalculateDistance() {
         Point point1 = new Point(1.0, 2.0);
         Point point2 = new Point(4.0, 6.0);
 
-        Assert.assertEquals(point1.distance(point2),5.0);
+        Assert.assertEquals(point1.distance(point2), 5.0);
     }
 
     @Test
-    public void shouldCalculateDistanceFromNegativeCoordinates(){
+    public void shouldCalculateDistanceFromNegativeCoordinates() {
         Point point1 = new Point(0.0, -10.0);
         Point point2 = new Point(-5.0, 2.0);
 
-        Assert.assertEquals(point1.distance(point2),13.0);
+        Assert.assertEquals(point1.distance(point2), 13.0);
     }
 
     @Test
-    public void shouldCalculateDistanceForASinglePoint(){
+    public void shouldCalculateDistanceForASinglePoint() {
         Point point = new Point(1.0, 2.0);
 
-        Assert.assertEquals(point.distance(point),0.0);
+        Assert.assertEquals(point.distance(point), 0.0);
     }
 }
