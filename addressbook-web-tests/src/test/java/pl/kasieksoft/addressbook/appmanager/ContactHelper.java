@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import pl.kasieksoft.addressbook.model.ContactData;
 
 public class ContactHelper {
-    public WebDriver wd;
+    private WebDriver wd;
 
     public ContactHelper(WebDriver wd) {
         this.wd = wd;

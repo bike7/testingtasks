@@ -6,7 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-    WebDriver wd;
+    private WebDriver wd;
 
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
