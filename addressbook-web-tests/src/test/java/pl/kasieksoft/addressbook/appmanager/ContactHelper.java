@@ -53,4 +53,12 @@ public class ContactHelper {
     public void selectContact() {
         wd.findElement(By.name("selected[]")).click();
     }
+
+    public void initContactModification() {
+        wd.findElement(By.cssSelector("img[alt=\"Edit\"]")).click();
+    }
+
+    public void submitContactModification() {
+        wd.findElement(By.name("update")).click();
+    }
 }
