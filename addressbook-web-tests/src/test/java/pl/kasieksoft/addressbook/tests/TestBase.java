@@ -1,7 +1,8 @@
-package pl.kasieksoft.addressbook;
+package pl.kasieksoft.addressbook.tests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pl.kasieksoft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 

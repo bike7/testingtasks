@@ -1,4 +1,4 @@
-package pl.kasieksoft.addressbook;
+package pl.kasieksoft.addressbook.model;
 
 public class GroupData {
     private final String name;

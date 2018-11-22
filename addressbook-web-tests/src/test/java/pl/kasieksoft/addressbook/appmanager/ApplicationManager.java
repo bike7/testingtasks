@@ -1,9 +1,11 @@
-package pl.kasieksoft.addressbook;
+package pl.kasieksoft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import pl.kasieksoft.addressbook.model.ContactData;
+import pl.kasieksoft.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 

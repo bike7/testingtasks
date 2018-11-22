@@ -1,4 +1,4 @@
-package pl.kasieksoft.addressbook;
+package pl.kasieksoft.addressbook.tests;
 
 import org.testng.annotations.Test;
 

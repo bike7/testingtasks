@@ -1,6 +1,7 @@
-package pl.kasieksoft.addressbook;
+package pl.kasieksoft.addressbook.tests;
 
 import org.testng.annotations.Test;
+import pl.kasieksoft.addressbook.model.ContactData;
 
 public class ContactCreationTests extends TestBase {
 
