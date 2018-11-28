@@ -3,6 +3,7 @@ package pl.kasieksoft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import pl.kasieksoft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -11,7 +12,7 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillNewContactForm(ContactData contactData) {
+    public void fillNewContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
         click(By.xpath("//div[@id='content']/form/label[3]"));
         type(By.name("lastname"), contactData.getLastname());
@@ -24,6 +25,15 @@ public class ContactHelper extends HelperBase {
         new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
         click(By.name("bmonth"));
         type(By.name("byear"), contactData.getByear());
+
+
+        if (creation) {
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+
+
     }
 
     public void submitNewContact() {
