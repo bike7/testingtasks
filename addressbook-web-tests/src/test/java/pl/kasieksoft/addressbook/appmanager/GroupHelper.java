@@ -51,7 +51,11 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-    public boolean isThereAGroup() {
+    public boolean isThereAnyGroup() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public boolean isThereAGroup(String groupName) {
+        return isElementPresent(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='" + groupName + "'])[2]/preceding::input[1]"));
     }
 }
