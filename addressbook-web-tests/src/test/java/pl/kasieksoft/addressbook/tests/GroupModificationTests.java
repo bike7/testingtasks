@@ -1,5 +1,6 @@
 package pl.kasieksoft.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.GroupData;
 
@@ -11,10 +12,13 @@ public class GroupModificationTests extends TestBase {
         if (!app.getGroupHelper().isThereAnyGroup()) {
             app.getGroupHelper().createGroup(new GroupData("test1", null, null));
         }
+        int before = app.getGroupHelper().getGroupCount();
         app.getGroupHelper().selectGroup();
         app.getGroupHelper().initGroupModification();
         app.getGroupHelper().fillGroupForm(new GroupData("test1 modified", "test2 modified", "test3 modified"));
         app.getGroupHelper().submitGroupModification();
         app.getGroupHelper().returnToGroupPage();
+        int after = app.getGroupHelper().getGroupCount();
+        Assert.assertEquals(after, before);
     }
 }
