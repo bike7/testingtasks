@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.GroupData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
@@ -21,7 +20,9 @@ public class GroupCreationTests extends TestBase {
 
         group.setId(after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId());
         before.add(group);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        before.sort(Comparator.comparingInt(GroupData::getId));
+        after.sort(Comparator.comparingInt(GroupData::getId));
+        Assert.assertEquals(before, after);
     }
 
 }
