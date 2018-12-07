@@ -19,15 +19,15 @@ public class ContactModificationTests extends TestBase {
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(0);
         app.getContactHelper().initContactModification();
-        app.getContactHelper().fillNewContactForm(ContactDataBuilder.aContactData().
-                        withFirstname("Adam").
-                        withLastname("Mickiewicz").
-                        withPhoneHome("+10 123 45 67").
-                        withEmail("N/A").
-                        withBday("7").
-                        withBmonth("July").
-                        withByear("2000").
-                        build(),
+        app.getContactHelper().fillNewContactForm(ContactDataBuilder.aContactData()
+                        .withFirstname("Adam")
+                        .withLastname("Mickiewicz")
+                        .withPhoneHome("+10 123 45 67")
+                        .withEmail("N/A")
+                        .withBday("7")
+                        .withBmonth("July")
+                        .withByear("2000")
+                        .build(),
                 false);
         app.getContactHelper().submitContactModification();
         app.getNavigationHelper().goToHomePage();

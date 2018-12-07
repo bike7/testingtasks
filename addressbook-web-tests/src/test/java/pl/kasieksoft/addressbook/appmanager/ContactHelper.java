@@ -85,8 +85,8 @@ public class ContactHelper extends HelperBase {
         for (WebElement element : elements) {
             contacts.add(ContactDataBuilder.aContactData()
                     .withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")))
-                    .withFirstname(element.findElement(By.xpath("//td[3]")).getText())
-                    .withLastname(element.findElement(By.xpath("//td[2]")).getText())
+                    .withFirstname(element.findElement(By.xpath("td[3]")).getText())
+                    .withLastname(element.findElement(By.xpath("td[2]")).getText())
                     .build());
         }
         return contacts;
