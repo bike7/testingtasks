@@ -62,13 +62,17 @@ public class GroupHelper extends HelperBase {
     public boolean isThereAGroup(String groupName) {
         return isElementPresent(By.xpath("//span[@class='group' and text()='" + groupName + "']"));
     }
-    
+
 
     public List<GroupData> getGroupList() {
         List<GroupData> groups = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
-            groups.add(new GroupData(element.getText(), null, null));
+            groups.add(new GroupData(
+                    element.findElement(By.tagName("input")).getAttribute("value"),
+                    element.getText(),
+                    null,
+                    null));
         }
         return groups;
     }
