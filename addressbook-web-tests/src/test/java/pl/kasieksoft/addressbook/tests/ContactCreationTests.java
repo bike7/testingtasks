@@ -3,6 +3,7 @@ package pl.kasieksoft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.ContactData;
+import pl.kasieksoft.addressbook.model.ContactDataBuilder;
 import pl.kasieksoft.addressbook.model.GroupData;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class ContactCreationTests extends TestBase {
         app.getNavigationHelper().goToHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
         app.getContactHelper().initNewContact();
-        app.getContactHelper().fillNewContactForm(new ContactData("Katarzyna", "Jarosz", null, null, "10", "March", "1992", groupName), true);
+        app.getContactHelper().fillNewContactForm(ContactDataBuilder.aContactData().withFirstname("Mikołaj").withLastname("Kopernik").withBday("1").withBmonth("April").withEmail("1999").build(), true);
         app.getContactHelper().submitNewContact();
         app.getNavigationHelper().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();

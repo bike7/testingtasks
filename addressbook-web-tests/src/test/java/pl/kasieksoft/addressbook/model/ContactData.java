@@ -1,6 +1,7 @@
 package pl.kasieksoft.addressbook.model;
 
 public class ContactData {
+    private int id;
     private final String firstname;
     private final String lastname;
     private final String phoneHome;
@@ -10,7 +11,8 @@ public class ContactData {
     private final String byear;
     private final String group;
 
-    public ContactData(String firstname, String lastname, String phoneHome, String email, String bday, String bmonth, String byear, String group) {
+    public ContactData(int id, String firstname, String lastname, String phoneHome, String email, String bday, String bmonth, String byear, String group) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phoneHome = phoneHome;
@@ -19,6 +21,14 @@ public class ContactData {
         this.bmonth = bmonth;
         this.byear = byear;
         this.group = group;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstname() {

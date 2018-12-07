@@ -1,6 +1,7 @@
 package pl.kasieksoft.addressbook.model;
 
 public final class ContactDataBuilder {
+    private int id;
     private String firstname;
     private String lastname;
     private String phoneHome;
@@ -15,6 +16,11 @@ public final class ContactDataBuilder {
 
     public static ContactDataBuilder aContactData() {
         return new ContactDataBuilder();
+    }
+
+    public ContactDataBuilder withId(int id) {
+        this.id = id;
+        return this;
     }
 
     public ContactDataBuilder withFirstname(String firstname) {
@@ -58,6 +64,6 @@ public final class ContactDataBuilder {
     }
 
     public ContactData build() {
-        return new ContactData(firstname, lastname, phoneHome, email, bday, bmonth, byear, group);
+        return new ContactData(id, firstname, lastname, phoneHome, email, bday, bmonth, byear, group);
     }
 }
