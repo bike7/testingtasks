@@ -19,9 +19,9 @@ public class ContactModificationTests extends TestBase {
         app.getNavigationHelper().goToHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
         int index = 0;
-        app.getContactHelper().selectContact(index);
-        app.getContactHelper().initContactModification();
+        app.getContactHelper().initContactModification(index);
         ContactData newContact = ContactDataBuilder.aContactData()
+                .withId(before.get(index).getId())
                 .withFirstname("Adam")
                 .withLastname("Mickiewicz")
                 .withPhoneHome("+10 123 45 67")
