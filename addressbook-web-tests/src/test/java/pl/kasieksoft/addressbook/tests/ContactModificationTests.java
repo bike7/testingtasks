@@ -15,13 +15,13 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
         app.getNavigationHelper().goToHomePage();
         if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(ContactDataBuilder.aContactData().withFirstname("Martin").withLastname("Ann").build());
+            app.getContactHelper().createContact(ContactDataBuilder.aContactData().withFirstname("Martin").withLastname("Ann").build(), true);
         }
         app.getNavigationHelper().goToHomePage();
     }
 
 
-    @Test(enabled = false)
+    @Test
     public void testContactModification() {
         List<ContactData> before = app.getContactHelper().getContactList();
         int index = 0;
@@ -35,9 +35,7 @@ public class ContactModificationTests extends TestBase {
                 .withBmonth("July")
                 .withByear("2000")
                 .build();
-        app.getContactHelper().initContactModification(index);
-        app.getContactHelper().fillNewContactForm(newContact, false);
-        app.getContactHelper().submitContactModification();
+        app.getContactHelper().modifyContact(index, newContact);
         app.getNavigationHelper().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
 
@@ -49,5 +47,4 @@ public class ContactModificationTests extends TestBase {
         after.sort(Comparator.comparingInt(ContactData::getId));
         Assert.assertEquals(before, after);
     }
-
 }

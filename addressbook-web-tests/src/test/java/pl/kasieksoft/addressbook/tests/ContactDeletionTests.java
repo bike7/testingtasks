@@ -15,12 +15,12 @@ public class ContactDeletionTests extends TestBase {
     public void ensurePreconditions() {
         app.getNavigationHelper().goToHomePage();
         if (!app.getContactHelper().isThereAContact()) {
-            app.getContactHelper().createContact(ContactDataBuilder.aContactData().withFirstname("Martin").withLastname("Ann").build());
+            app.getContactHelper().createContact(ContactDataBuilder.aContactData().withFirstname("Martin").withLastname("Ann").build(), true);
         }
         app.getNavigationHelper().goToHomePage();
     }
 
-    @Test(enabled = false)
+    @Test
     public void testContactDeletion() {
         List<ContactData> before = app.getContactHelper().getContactList();
         int index = before.size() - 1;

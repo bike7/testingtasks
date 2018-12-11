@@ -73,10 +73,20 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createContact(ContactData contact) {
+    public void createContact(ContactData contact, boolean simple) {
         initNewContact();
-        simpleFillNewContactForm(contact);
+        if (simple) {
+            simpleFillNewContactForm(contact);
+        } else {
+            fillNewContactForm(contact, true);
+        }
         submitNewContact();
+    }
+
+    public void modifyContact(int index, ContactData newContact) {
+        initContactModification(index);
+        fillNewContactForm(newContact, false);
+        submitContactModification();
     }
 
     public List<ContactData> getContactList() {

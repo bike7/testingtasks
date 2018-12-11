@@ -1,6 +1,7 @@
 package pl.kasieksoft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.ContactData;
 import pl.kasieksoft.addressbook.model.ContactDataBuilder;
@@ -11,15 +12,19 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test(enabled = false)
-    public void testContactCreation() {
-        String groupName = "test1";
+    private static final String TEST_GROUP_NAME = "test1";
 
+    @BeforeMethod
+    public void ensurePreconditions() {
         app.getNavigationHelper().goToGroupPage();
-        if (!app.getGroupHelper().isThereAGroup(groupName)) {
-            app.getGroupHelper().createGroup(new GroupData(groupName, null, null));
+        if (!app.getGroupHelper().isThereAGroup(TEST_GROUP_NAME)) {
+            app.getGroupHelper().createGroup(new GroupData(TEST_GROUP_NAME, null, null));
         }
         app.getNavigationHelper().goToHomePage();
+    }
+
+    @Test
+    public void testContactCreation() {
         List<ContactData> before = app.getContactHelper().getContactList();
         ContactData newContact = ContactDataBuilder.aContactData()
                 .withFirstname("Mikołaj")
@@ -27,11 +32,9 @@ public class ContactCreationTests extends TestBase {
                 .withBday("1")
                 .withBmonth("April")
                 .withEmail("1999")
-                .withGroup(groupName)
+                .withGroup(TEST_GROUP_NAME)
                 .build();
-        app.getContactHelper().initNewContact();
-        app.getContactHelper().fillNewContactForm(newContact, true);
-        app.getContactHelper().submitNewContact();
+        app.getContactHelper().createContact(newContact, false);
         app.getNavigationHelper().goToHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), before.size() + 1);
