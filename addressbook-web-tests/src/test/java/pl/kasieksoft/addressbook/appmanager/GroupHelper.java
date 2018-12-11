@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pl.kasieksoft.addressbook.model.GroupData;
+import pl.kasieksoft.addressbook.model.GroupDataBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,10 +70,6 @@ public class GroupHelper extends HelperBase {
         returnToGroupPage();
     }
 
-    public boolean isThereAnyGroup() {
-        return isElementPresent(By.name("selected[]"));
-    }
-
     public boolean isThereAGroup(String groupName) {
         return isElementPresent(By.xpath("//span[@class='group' and text()='" + groupName + "']"));
     }
@@ -81,11 +78,7 @@ public class GroupHelper extends HelperBase {
         List<GroupData> groups = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements) {
-            groups.add(new GroupData(
-                    Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")),
-                    element.getText(),
-                    null,
-                    null));
+            groups.add(new GroupDataBuilder().withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"))).withName(element.getText()).withHeader(null).withFooter(null).build());
         }
         return groups;
     }

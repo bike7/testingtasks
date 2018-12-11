@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.ContactData;
 import pl.kasieksoft.addressbook.model.ContactDataBuilder;
-import pl.kasieksoft.addressbook.model.GroupData;
+import pl.kasieksoft.addressbook.model.GroupDataBuilder;
 
 import java.util.Comparator;
 import java.util.List;
@@ -18,7 +18,7 @@ public class ContactCreationTests extends TestBase {
     public void ensurePreconditions() {
         app.goTo().groupPage();
         if (!app.group().isThereAGroup(TEST_GROUP_NAME)) {
-            app.group().create(new GroupData(TEST_GROUP_NAME, null, null));
+            app.group().create(GroupDataBuilder.aGroupData().withName(TEST_GROUP_NAME).withHeader(null).withFooter(null).build());
         }
         app.goTo().homePage();
     }

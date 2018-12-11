@@ -3,6 +3,7 @@ package pl.kasieksoft.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.GroupData;
+import pl.kasieksoft.addressbook.model.GroupDataBuilder;
 
 import java.util.Comparator;
 import java.util.List;
@@ -13,7 +14,7 @@ public class GroupCreationTests extends TestBase {
     public void testGroupCreation() {
         app.goTo().groupPage();
         List<GroupData> before = app.group().list();
-        GroupData group = new GroupData("test1", null, null);
+        GroupData group = GroupDataBuilder.aGroupData().withName("test1").withHeader(null).withFooter(null).build();
         app.group().create(group);
         List<GroupData> after = app.group().list();
         Assert.assertEquals(after.size(), before.size() + 1);
