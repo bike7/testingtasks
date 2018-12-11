@@ -16,16 +16,16 @@ public class ContactCreationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.getNavigationHelper().goToGroupPage();
-        if (!app.getGroupHelper().isThereAGroup(TEST_GROUP_NAME)) {
-            app.getGroupHelper().createGroup(new GroupData(TEST_GROUP_NAME, null, null));
+        app.goTo().groupPage();
+        if (!app.group().isThereAGroup(TEST_GROUP_NAME)) {
+            app.group().create(new GroupData(TEST_GROUP_NAME, null, null));
         }
-        app.getNavigationHelper().goToHomePage();
+        app.goTo().homePage();
     }
 
     @Test
     public void testContactCreation() {
-        List<ContactData> before = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
         ContactData newContact = ContactDataBuilder.aContactData()
                 .withFirstname("Mikołaj")
                 .withLastname("Kopernik")
@@ -34,9 +34,9 @@ public class ContactCreationTests extends TestBase {
                 .withEmail("1999")
                 .withGroup(TEST_GROUP_NAME)
                 .build();
-        app.getContactHelper().createContact(newContact, false);
-        app.getNavigationHelper().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        app.contact().create(newContact, false);
+        app.goTo().homePage();
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() + 1);
 
         newContact.setId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());

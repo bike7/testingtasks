@@ -73,7 +73,7 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public void createContact(ContactData contact, boolean simple) {
+    public void create(ContactData contact, boolean simple) {
         initNewContact();
         if (simple) {
             simpleFillNewContactForm(contact);
@@ -83,13 +83,13 @@ public class ContactHelper extends HelperBase {
         submitNewContact();
     }
 
-    public void modifyContact(int index, ContactData newContact) {
+    public void modify(int index, ContactData newContact) {
         initContactModification(index);
         fillNewContactForm(newContact, false);
         submitContactModification();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();
         List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element : elements) {
