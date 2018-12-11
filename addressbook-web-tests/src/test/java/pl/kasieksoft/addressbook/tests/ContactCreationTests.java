@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test
+    @Test(enabled = false)
     public void testContactCreation() {
         String groupName = "test1";
 
@@ -21,7 +21,6 @@ public class ContactCreationTests extends TestBase {
         }
         app.getNavigationHelper().goToHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().initNewContact();
         ContactData newContact = ContactDataBuilder.aContactData()
                 .withFirstname("Mikołaj")
                 .withLastname("Kopernik")
@@ -30,7 +29,7 @@ public class ContactCreationTests extends TestBase {
                 .withEmail("1999")
                 .withGroup(groupName)
                 .build();
-
+        app.getContactHelper().initNewContact();
         app.getContactHelper().fillNewContactForm(newContact, true);
         app.getContactHelper().submitNewContact();
         app.getNavigationHelper().goToHomePage();
