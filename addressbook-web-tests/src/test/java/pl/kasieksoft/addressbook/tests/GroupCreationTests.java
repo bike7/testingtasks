@@ -5,24 +5,21 @@ import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.GroupData;
 import pl.kasieksoft.addressbook.model.GroupDataBuilder;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase {
 
     @Test
     public void testGroupCreation() {
         app.goTo().groupPage();
-        List<GroupData> before = app.group().list();
+        Set<GroupData> before = app.group().all();
         GroupData group = GroupDataBuilder.aGroupData().withName("test1").withHeader(null).withFooter(null).build();
         app.group().create(group);
-        List<GroupData> after = app.group().list();
+        Set<GroupData> after = app.group().all();
         Assert.assertEquals(after.size(), before.size() + 1);
 
-        group.setId(after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId());
+        group.setId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
         before.add(group);
-        before.sort(Comparator.comparingInt(GroupData::getId));
-        after.sort(Comparator.comparingInt(GroupData::getId));
         Assert.assertEquals(before, after);
     }
 
