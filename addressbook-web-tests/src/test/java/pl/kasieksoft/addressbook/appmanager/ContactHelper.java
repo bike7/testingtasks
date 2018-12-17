@@ -19,28 +19,18 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void simpleFillNewContactForm(ContactData contactData) {
-        type(By.name("firstname"), contactData.getFirstname());
-        click(By.xpath("//div[@id='content']/form/label[3]"));
-        type(By.name("lastname"), contactData.getLastname());
-    }
-
     public void fillNewContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
-        click(By.xpath("//div[@id='content']/form/label[3]"));
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("home"), contactData.getPhoneHome());
         type(By.name("email"), contactData.getEmail());
-        click(By.name("bday"));
-        new Select(wd.findElement(By.name("bday"))).selectByVisibleText(contactData.getBday());
-        click(By.name("bday"));
-        click(By.name("bmonth"));
-        new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(contactData.getBmonth());
-        click(By.name("bmonth"));
+        selectFromDropdown("bday", contactData.getBday());
+        selectFromDropdown("bmonth", contactData.getBmonth());
         type(By.name("byear"), contactData.getByear());
-
         if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            if (contactData.getGroup() != null) {
+                new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+            }
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
@@ -74,11 +64,7 @@ public class ContactHelper extends HelperBase {
 
     public void create(ContactData contact, boolean simple) {
         initNewContact();
-        if (simple) {
-            simpleFillNewContactForm(contact);
-        } else {
-            fillNewContactForm(contact, true);
-        }
+        fillNewContactForm(contact, true);
         submitNewContact();
     }
 
@@ -112,5 +98,13 @@ public class ContactHelper extends HelperBase {
                     .build());
         }
         return contacts;
+    }
+
+    private void selectFromDropdown(String name, String text) {
+        if (text != null) {
+            click(By.name(name));
+            new Select(wd.findElement(By.name(name))).selectByVisibleText(text);
+            click(By.name(name));
+        }
     }
 }
