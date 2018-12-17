@@ -7,8 +7,7 @@ import pl.kasieksoft.addressbook.model.ContactData;
 import pl.kasieksoft.addressbook.model.ContactDataBuilder;
 import pl.kasieksoft.addressbook.model.GroupDataBuilder;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
@@ -18,14 +17,14 @@ public class ContactCreationTests extends TestBase {
     public void ensurePreconditions() {
         app.goTo().groupPage();
         if (!app.group().isThereAGroup(TEST_GROUP_NAME)) {
-            app.group().create(GroupDataBuilder.aGroupData().withName(TEST_GROUP_NAME).withHeader(null).withFooter(null).build());
+            app.group().create(GroupDataBuilder.aGroupData().withName(TEST_GROUP_NAME).build());
         }
         app.goTo().homePage();
     }
 
     @Test
     public void testContactCreation() {
-        List<ContactData> before = app.contact().list();
+        Set<ContactData> before = app.contact().all();
         ContactData newContact = ContactDataBuilder.aContactData()
                 .withFirstname("Mikołaj")
                 .withLastname("Kopernik")
@@ -36,13 +35,11 @@ public class ContactCreationTests extends TestBase {
                 .build();
         app.contact().create(newContact, false);
         app.goTo().homePage();
-        List<ContactData> after = app.contact().list();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() + 1);
-
-        newContact.setId(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getId());
+        
+        newContact.setId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
         before.add(newContact);
-        before.sort(Comparator.comparingInt(ContactData::getId));
-        after.sort(Comparator.comparingInt(ContactData::getId));
         Assert.assertEquals(before, after);
     }
 }

@@ -6,15 +6,14 @@ import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.ContactData;
 import pl.kasieksoft.addressbook.model.ContactDataBuilder;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class ContactModificationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
         app.goTo().homePage();
-        if (app.contact().list().size() == 0) {
+        if (app.contact().all().size() == 0) {
             app.contact().create(ContactDataBuilder.aContactData().withFirstname("Martin").withLastname("Ann").build(), true);
         }
         app.goTo().homePage();
@@ -23,10 +22,10 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModification() {
-        List<ContactData> before = app.contact().list();
-        int index = 0;
+        Set<ContactData> before = app.contact().all();
+        ContactData modifiedContact = before.iterator().next();
         ContactData newContact = ContactDataBuilder.aContactData()
-                .withId(before.get(index).getId())
+                .withId(modifiedContact.getId())
                 .withFirstname("Adam")
                 .withLastname("Mickiewicz")
                 .withPhoneHome("+10 123 45 67")
@@ -35,16 +34,14 @@ public class ContactModificationTests extends TestBase {
                 .withBmonth("July")
                 .withByear("2000")
                 .build();
-        app.contact().modify(index, newContact);
+        app.contact().modify(newContact);
         app.goTo().homePage();
-        List<ContactData> after = app.contact().list();
+        Set<ContactData> after = app.contact().all();
 
         Assert.assertEquals(after.size(), before.size());
 
-        before.remove(index);
+        before.remove(modifiedContact);
         before.add(newContact);
-        before.sort(Comparator.comparingInt(ContactData::getId));
-        after.sort(Comparator.comparingInt(ContactData::getId));
         Assert.assertEquals(before, after);
     }
 }
