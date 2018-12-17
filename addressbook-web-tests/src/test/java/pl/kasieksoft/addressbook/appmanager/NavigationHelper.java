@@ -23,7 +23,7 @@ public class NavigationHelper extends HelperBase {
         if (!forceRefresh && isElementPresent(By.id("maintable"))) {
             return;
         }
-        click(By.linkText("home"));
+        wd.get(ApplicationManager.APPLICATION_URL);
     }
 
     public void homePage() {

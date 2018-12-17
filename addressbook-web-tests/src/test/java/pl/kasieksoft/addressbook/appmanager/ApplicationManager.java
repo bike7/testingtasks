@@ -9,6 +9,8 @@ import org.openqa.selenium.remote.BrowserType;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
+    public static final String APPLICATION_URL = "http://localhost/addressbook/";
+
     String browser;
     private WebDriver wd;
 
@@ -30,7 +32,7 @@ public class ApplicationManager {
             wd = new InternetExplorerDriver();
         }
         wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        wd.get("http://localhost/addressbook/");
+        wd.get(APPLICATION_URL);
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
