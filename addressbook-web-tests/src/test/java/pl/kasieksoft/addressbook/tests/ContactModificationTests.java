@@ -1,12 +1,14 @@
 package pl.kasieksoft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.ContactData;
 import pl.kasieksoft.addressbook.model.ContactDataBuilder;
+import pl.kasieksoft.addressbook.model.Contacts;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTests extends TestBase {
 
@@ -14,7 +16,7 @@ public class ContactModificationTests extends TestBase {
     public void ensurePreconditions() {
         app.goTo().homePage();
         if (app.contact().all().size() == 0) {
-            app.contact().create(ContactDataBuilder.aContactData().withFirstname("Martin").withLastname("Ann").build(), true);
+            app.contact().create(ContactDataBuilder.aContactData().withFirstname("Martin").withLastname("Ann").build());
         }
         app.goTo().homePage();
     }
@@ -22,7 +24,7 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModification() {
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         ContactData modifiedContact = before.iterator().next();
         ContactData newContact = ContactDataBuilder.aContactData()
                 .withId(modifiedContact.getId())
@@ -36,12 +38,9 @@ public class ContactModificationTests extends TestBase {
                 .build();
         app.contact().modify(newContact);
         app.goTo().homePage();
-        Set<ContactData> after = app.contact().all();
+        Contacts after = app.contact().all();
 
-        Assert.assertEquals(after.size(), before.size());
-
-        before.remove(modifiedContact);
-        before.add(newContact);
-        Assert.assertEquals(before, after);
+        assertEquals(after.size(), before.size());
+        assertThat(after, equalTo(before.without(modifiedContact).withAdded(newContact)));
     }
 }

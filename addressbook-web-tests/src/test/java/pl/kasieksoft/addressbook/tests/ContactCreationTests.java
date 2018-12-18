@@ -1,13 +1,15 @@
 package pl.kasieksoft.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.ContactData;
 import pl.kasieksoft.addressbook.model.ContactDataBuilder;
+import pl.kasieksoft.addressbook.model.Contacts;
 import pl.kasieksoft.addressbook.model.GroupDataBuilder;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactCreationTests extends TestBase {
 
@@ -24,7 +26,7 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() {
-        Set<ContactData> before = app.contact().all();
+        Contacts before = app.contact().all();
         ContactData newContact = ContactDataBuilder.aContactData()
                 .withFirstname("Mikołaj")
                 .withLastname("Kopernik")
@@ -33,13 +35,12 @@ public class ContactCreationTests extends TestBase {
                 .withEmail("1999")
                 .withGroup(TEST_GROUP_NAME)
                 .build();
-        app.contact().create(newContact, false);
+        app.contact().create(newContact);
         app.goTo().homePage();
-        Set<ContactData> after = app.contact().all();
-        Assert.assertEquals(after.size(), before.size() + 1);
-        
+        Contacts after = app.contact().all();
+        assertEquals(after.size(), before.size() + 1);
+
         newContact.setId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
-        before.add(newContact);
-        Assert.assertEquals(before, after);
+        assertThat(after, equalTo(before.withAdded(newContact)));
     }
 }

@@ -7,11 +7,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.kasieksoft.addressbook.model.ContactData;
 import pl.kasieksoft.addressbook.model.ContactDataBuilder;
+import pl.kasieksoft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -62,7 +61,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void create(ContactData contact, boolean simple) {
+    public void create(ContactData contact) {
         initNewContact();
         fillNewContactForm(contact, true);
         submitNewContact();
@@ -74,8 +73,8 @@ public class ContactHelper extends HelperBase {
         submitContactModification();
     }
 
-    public Set<ContactData> all() {
-        Set<ContactData> contacts = new HashSet<>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element : elements) {
             contacts.add(ContactDataBuilder.aContactData()
