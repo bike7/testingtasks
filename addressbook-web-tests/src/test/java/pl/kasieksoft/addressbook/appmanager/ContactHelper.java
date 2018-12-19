@@ -87,12 +87,16 @@ public class ContactHelper extends HelperBase {
             return new Contacts(contactCache);
         }
         contactCache = new Contacts();
-        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
-        for (WebElement element : elements) {
+        List<WebElement> rows = wd.findElements(By.xpath("//tr[@name='entry']"));
+        for (WebElement row : rows) {
+            String[] phones = row.findElement(By.xpath("td[6]")).getText().split("\n");
             contactCache.add(ContactDataBuilder.aContactData()
-                    .withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")))
-                    .withFirstname(element.findElement(By.xpath("td[3]")).getText())
-                    .withLastname(element.findElement(By.xpath("td[2]")).getText())
+                    .withId(Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value")))
+                    .withFirstname(row.findElement(By.xpath("td[3]")).getText())
+                    .withLastname(row.findElement(By.xpath("td[2]")).getText())
+                    .withHomePhone(phones[0])
+                    .withMobilePhone(phones[1])
+                    .withWorkPhone(phones[2])
                     .build());
         }
         return new Contacts(contactCache);
@@ -118,4 +122,18 @@ public class ContactHelper extends HelperBase {
             click(By.name(name));
         }
     }
+
+    public ContactData infoFromEditForm(ContactData contact) {
+        initContactModification(contact.getId());
+        return ContactDataBuilder.aContactData()
+                .withFirstname(wd.findElement(By.name("firstname")).getAttribute("value"))
+                .withLastname(wd.findElement(By.name("lastname")).getAttribute("value"))
+                .withHomePhone(wd.findElement(By.name("home")).getAttribute("value"))
+                .withMobilePhone(wd.findElement(By.name("mobile")).getAttribute("value"))
+                .withWorkPhone(wd.findElement(By.name("work")).getAttribute("value"))
+                .build();
+
+    }
+
+
 }

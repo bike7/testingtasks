@@ -10,6 +10,9 @@ public final class ContactDataBuilder {
     private String bmonth;
     private String byear;
     private String group;
+    private String home;
+    private String mobile;
+    private String work;
 
     private ContactDataBuilder() {
     }
@@ -63,7 +66,22 @@ public final class ContactDataBuilder {
         return this;
     }
 
+    public ContactDataBuilder withHomePhone(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public ContactDataBuilder withMobilePhone(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public ContactDataBuilder withWorkPhone(String work) {
+        this.work = work;
+        return this;
+    }
+
     public ContactData build() {
-        return new ContactData(id, firstname, lastname, phoneHome, email, bday, bmonth, byear, group);
+        return new ContactData(id, firstname, lastname, phoneHome, email, bday, bmonth, byear, group, home, mobile, work);
     }
 }
