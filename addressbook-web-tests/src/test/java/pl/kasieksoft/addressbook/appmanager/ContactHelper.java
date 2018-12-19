@@ -14,6 +14,8 @@ import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
+    private Contacts contactCache = null;
+
     public ContactHelper(WebDriver wd) {
         super(wd);
     }
@@ -46,6 +48,7 @@ public class ContactHelper extends HelperBase {
     public void deleteSelectedContact() {
         click(By.xpath("//input[@value='Delete']"));
         wd.switchTo().alert().accept();
+        contactCache = null;
     }
 
     public void selectContact(int id) {
@@ -64,26 +67,31 @@ public class ContactHelper extends HelperBase {
     public void create(ContactData contact) {
         initNewContact();
         fillNewContactForm(contact, true);
+        contactCache = null;
         submitNewContact();
     }
 
     public void modify(ContactData contact) {
         initContactModification(contact.getId());
         fillNewContactForm(contact, false);
+        contactCache = null;
         submitContactModification();
     }
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null) {
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element : elements) {
-            contacts.add(ContactDataBuilder.aContactData()
+            contactCache.add(ContactDataBuilder.aContactData()
                     .withId(Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")))
                     .withFirstname(element.findElement(By.xpath("td[3]")).getText())
                     .withLastname(element.findElement(By.xpath("td[2]")).getText())
                     .build());
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 
     public List<ContactData> list() {
