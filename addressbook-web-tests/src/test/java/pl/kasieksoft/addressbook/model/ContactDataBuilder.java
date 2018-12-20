@@ -4,8 +4,6 @@ public final class ContactDataBuilder {
     private int id;
     private String firstname;
     private String lastname;
-    private String phoneHome;
-    private String email;
     private String bday;
     private String bmonth;
     private String byear;
@@ -14,6 +12,11 @@ public final class ContactDataBuilder {
     private String mobilePhone;
     private String workPhone;
     private String allPhones;
+    private String email;
+    private String email2;
+    private String email3;
+    private String allEmails;
+    private String address;
 
     private ContactDataBuilder() {
     }
@@ -34,16 +37,6 @@ public final class ContactDataBuilder {
 
     public ContactDataBuilder withLastname(String lastname) {
         this.lastname = lastname;
-        return this;
-    }
-
-    public ContactDataBuilder withPhoneHome(String phoneHome) {
-        this.phoneHome = phoneHome;
-        return this;
-    }
-
-    public ContactDataBuilder withEmail(String email) {
-        this.email = email;
         return this;
     }
 
@@ -87,8 +80,33 @@ public final class ContactDataBuilder {
         return this;
     }
 
+    public ContactDataBuilder withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactDataBuilder withEmail2(String email2) {
+        this.email2 = email2;
+        return this;
+    }
+
+    public ContactDataBuilder withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+
+    public ContactDataBuilder withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
+
+    public ContactDataBuilder withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
     public ContactData build() {
-        return new ContactData(id, firstname, lastname, email, bday, bmonth, byear, group, homePhone, mobilePhone, workPhone, allPhones);
+        return new ContactData(id, firstname, lastname, bday, bmonth, byear, group, homePhone, mobilePhone, workPhone, allPhones, email, email2, email3, allEmails, address);
     }
 
 

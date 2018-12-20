@@ -6,7 +6,6 @@ public class ContactData {
     private int id;
     private final String firstname;
     private final String lastname;
-    private final String email;
     private final String bday;
     private final String bmonth;
     private final String byear;
@@ -15,14 +14,18 @@ public class ContactData {
     private final String mobilePhone;
     private final String workPhone;
     private final String allPhones;
+    private final String email;
+    private final String email2;
+    private final String email3;
+    private final String allEmails;
+    private final String address;
 
-    public ContactData(int id, String firstname, String lastname, String email,
-                       String bday, String bmonth, String byear, String group,
-                       String homePhone, String mobilePhone, String workPhone, String allPhones) {
+    public ContactData(int id, String firstname, String lastname, String bday, String bmonth, String byear, String group,
+                       String homePhone, String mobilePhone, String workPhone, String allPhones,
+                       String email, String email2, String email3, String allEmails, String address) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.email = email;
         this.bday = bday;
         this.bmonth = bmonth;
         this.byear = byear;
@@ -31,6 +34,11 @@ public class ContactData {
         this.mobilePhone = mobilePhone;
         this.workPhone = workPhone;
         this.allPhones = allPhones;
+        this.email = email;
+        this.email2 = email2;
+        this.email3 = email3;
+        this.allEmails = allEmails;
+        this.address = address;
     }
 
     public int getId() {
@@ -47,10 +55,6 @@ public class ContactData {
 
     public String getLastname() {
         return lastname;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getBday() {
@@ -85,6 +89,25 @@ public class ContactData {
         return allPhones;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getEmail2() {
+        return email2;
+    }
+
+    public String getEmail3() {
+        return email3;
+    }
+
+    public String getAllEmails() {
+        return allEmails;
+    }
+
+    public String getAddress() {
+        return address;
+    }
 
     @Override
     public String toString() {

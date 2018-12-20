@@ -94,6 +94,8 @@ public class ContactHelper extends HelperBase {
                     .withFirstname(row.findElement(By.xpath("td[3]")).getText())
                     .withLastname(row.findElement(By.xpath("td[2]")).getText())
                     .withAllPhones(row.findElement(By.xpath("td[6]")).getText())
+                    .withAllEmails(row.findElement(By.xpath("td[5]")).getText())
+                    .withAddress(row.findElement(By.xpath("td[4]")).getText())
                     .build());
         }
         return new Contacts(contactCache);
@@ -128,6 +130,10 @@ public class ContactHelper extends HelperBase {
                 .withHomePhone(wd.findElement(By.name("home")).getAttribute("value"))
                 .withMobilePhone(wd.findElement(By.name("mobile")).getAttribute("value"))
                 .withWorkPhone(wd.findElement(By.name("work")).getAttribute("value"))
+                .withEmail(wd.findElement(By.name("email")).getAttribute("value"))
+                .withEmail2(wd.findElement(By.name("email2")).getAttribute("value"))
+                .withEmail3(wd.findElement(By.name("email3")).getAttribute("value"))
+                .withAddress(wd.findElement(By.name("address")).getText())
                 .build();
 
     }
