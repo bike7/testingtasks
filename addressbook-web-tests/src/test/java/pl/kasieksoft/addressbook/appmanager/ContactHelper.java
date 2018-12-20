@@ -152,23 +152,5 @@ public class ContactHelper extends HelperBase {
                 .filter((s) -> !s.equals("")).collect(Collectors.toList());
     }
 
-    public List<String> modelDetailsPage(ContactData contact) {
-        List<String> model = new ArrayList();
-        model.add(contact.getFirstname() + " " + contact.getLastname());
-        model.add(contact.getAddress());
-        if (contact.getHomePhone() != null) {
-            model.add("H: " + contact.getHomePhone());
-        }
-        if (contact.getMobilePhone() != null) {
-            model.add("M: " + contact.getMobilePhone());
-        }
-        if (contact.getWorkPhone() != null) {
-            model.add("W: " + contact.getWorkPhone());
-        }
-        model.add(contact.getEmail());
-        model.add(contact.getEmail2());
-        model.add(contact.getEmail3());
-        model.removeIf(p -> p.isEmpty());
-        return model;
-    }
+
 }

@@ -3,6 +3,7 @@ package pl.kasieksoft.addressbook.tests;
 import org.testng.annotations.Test;
 import pl.kasieksoft.addressbook.model.ContactData;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,7 +24,7 @@ public class ContactDetailsTests extends TestBase {
         assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
         assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
 
-        assertThat(contactInfoFromDetailsPage, equalTo(app.contact().modelDetailsPage(contactInfoFromEditForm)));
+        assertThat(contactInfoFromDetailsPage, equalTo(asListInContactDetailsPageFormat(contactInfoFromEditForm)));
     }
 
     private String mergeEmails(ContactData contact) {
@@ -41,5 +42,25 @@ public class ContactDetailsTests extends TestBase {
 
     private static String cleaned(String phone) {
         return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
+    }
+
+    private static List<String> asListInContactDetailsPageFormat(ContactData contact) {
+        List<String> result = new ArrayList<>();
+        result.add(contact.getFirstname() + " " + contact.getLastname());
+        result.add(contact.getAddress());
+        if (contact.getHomePhone() != null) {
+            result.add("H: " + contact.getHomePhone());
+        }
+        if (contact.getMobilePhone() != null) {
+            result.add("M: " + contact.getMobilePhone());
+        }
+        if (contact.getWorkPhone() != null) {
+            result.add("W: " + contact.getWorkPhone());
+        }
+        result.add(contact.getEmail());
+        result.add(contact.getEmail2());
+        result.add(contact.getEmail3());
+        result.removeIf(String::isEmpty);
+        return result;
     }
 }
