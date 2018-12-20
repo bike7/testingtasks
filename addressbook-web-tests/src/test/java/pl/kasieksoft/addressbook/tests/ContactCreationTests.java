@@ -30,9 +30,10 @@ public class ContactCreationTests extends TestBase {
         ContactData newContact = ContactDataBuilder.aContactData()
                 .withFirstname("Mikołaj")
                 .withLastname("Kopernik")
+                .withEmail("anonymous@gmail.com")
                 .withBday("1")
                 .withBmonth("April")
-                .withEmail("1999")
+                .withByear("1999")
                 .withGroup(TEST_GROUP_NAME)
                 .build();
         app.contact().create(newContact);

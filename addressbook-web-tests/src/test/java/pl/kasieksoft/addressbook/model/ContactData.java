@@ -6,29 +6,31 @@ public class ContactData {
     private int id;
     private final String firstname;
     private final String lastname;
-    private final String phoneHome;
     private final String email;
     private final String bday;
     private final String bmonth;
     private final String byear;
     private final String group;
-    private final String home;
-    private final String mobile;
-    private final String work;
+    private final String homePhone;
+    private final String mobilePhone;
+    private final String workPhone;
+    private final String allPhones;
 
-    public ContactData(int id, String firstname, String lastname, String phoneHome, String email, String bday, String bmonth, String byear, String group, String home, String mobile, String work) {
+    public ContactData(int id, String firstname, String lastname, String email,
+                       String bday, String bmonth, String byear, String group,
+                       String homePhone, String mobilePhone, String workPhone, String allPhones) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
-        this.phoneHome = phoneHome;
         this.email = email;
         this.bday = bday;
         this.bmonth = bmonth;
         this.byear = byear;
         this.group = group;
-        this.home = home;
-        this.mobile = mobile;
-        this.work = work;
+        this.homePhone = homePhone;
+        this.mobilePhone = mobilePhone;
+        this.workPhone = workPhone;
+        this.allPhones = allPhones;
     }
 
     public int getId() {
@@ -45,10 +47,6 @@ public class ContactData {
 
     public String getLastname() {
         return lastname;
-    }
-
-    public String getPhoneHome() {
-        return phoneHome;
     }
 
     public String getEmail() {
@@ -71,17 +69,22 @@ public class ContactData {
         return group;
     }
 
-    public String getHome() {
-        return home;
+    public String getHomePhone() {
+        return homePhone;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getMobilePhone() {
+        return mobilePhone;
     }
 
-    public String getWork() {
-        return work;
+    public String getWorkPhone() {
+        return workPhone;
     }
+
+    public String getAllPhones() {
+        return allPhones;
+    }
+
 
     @Override
     public String toString() {

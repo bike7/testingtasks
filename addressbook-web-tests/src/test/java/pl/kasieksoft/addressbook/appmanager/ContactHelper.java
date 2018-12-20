@@ -23,7 +23,7 @@ public class ContactHelper extends HelperBase {
     public void fillNewContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
-        type(By.name("home"), contactData.getPhoneHome());
+        type(By.name("home"), contactData.getHomePhone());
         type(By.name("email"), contactData.getEmail());
         selectFromDropdown("bday", contactData.getBday());
         selectFromDropdown("bmonth", contactData.getBmonth());
@@ -89,14 +89,11 @@ public class ContactHelper extends HelperBase {
         contactCache = new Contacts();
         List<WebElement> rows = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement row : rows) {
-            String[] phones = row.findElement(By.xpath("td[6]")).getText().split("\n");
             contactCache.add(ContactDataBuilder.aContactData()
                     .withId(Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value")))
                     .withFirstname(row.findElement(By.xpath("td[3]")).getText())
                     .withLastname(row.findElement(By.xpath("td[2]")).getText())
-                    .withHomePhone(phones[0])
-                    .withMobilePhone(phones[1])
-                    .withWorkPhone(phones[2])
+                    .withAllPhones(row.findElement(By.xpath("td[6]")).getText())
                     .build());
         }
         return new Contacts(contactCache);
