@@ -10,17 +10,19 @@ import pl.kasieksoft.addressbook.model.ContactDataBuilder;
 import pl.kasieksoft.addressbook.model.Contacts;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContactHelper extends HelperBase {
 
     private Contacts contactCache = null;
 
-    public ContactHelper(WebDriver wd) {
+    ContactHelper(WebDriver wd) {
         super(wd);
     }
 
-    public void fillNewContactForm(ContactData contactData, boolean creation) {
+    private void fillNewContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("lastname"), contactData.getLastname());
         type(By.name("home"), contactData.getHomePhone());
@@ -37,11 +39,11 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void submitNewContact() {
+    private void submitNewContact() {
         click(By.xpath("(//input[@name='submit'])[2]"));
     }
 
-    public void initNewContact() {
+    private void initNewContact() {
         click(By.linkText("add new"));
     }
 
@@ -55,12 +57,18 @@ public class ContactHelper extends HelperBase {
         click(By.cssSelector("input[value='" + id + "']"));
     }
 
-    public void initContactModification(int id) {
+    private void initContactModification(int id) {
         String currentUrl = wd.getCurrentUrl();
         wd.get(currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1) + "edit.php?id=" + id);
     }
 
-    public void submitContactModification() {
+    private void enterContactDetailsPage(int id) {
+        String currentUrl = wd.getCurrentUrl();
+        wd.get(currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1) + "view.php?id=" + id);
+
+    }
+
+    private void submitContactModification() {
         click(By.name("update"));
     }
 
@@ -138,5 +146,29 @@ public class ContactHelper extends HelperBase {
 
     }
 
+    public List<String> infoFromDetailsPage(ContactData contact) {
+        enterContactDetailsPage(contact.getId());
+        return Arrays.stream(wd.findElement(By.xpath("//div[@id='content']")).getText().split("\n"))
+                .filter((s) -> !s.equals("")).collect(Collectors.toList());
+    }
 
+    public List<String> modelDetailsPage(ContactData contact) {
+        List<String> model = new ArrayList();
+        model.add(contact.getFirstname() + " " + contact.getLastname());
+        model.add(contact.getAddress());
+        if (contact.getHomePhone() != null) {
+            model.add("H: " + contact.getHomePhone());
+        }
+        if (contact.getMobilePhone() != null) {
+            model.add("M: " + contact.getMobilePhone());
+        }
+        if (contact.getWorkPhone() != null) {
+            model.add("W: " + contact.getWorkPhone());
+        }
+        model.add(contact.getEmail());
+        model.add(contact.getEmail2());
+        model.add(contact.getEmail3());
+        model.removeIf(p -> p.isEmpty());
+        return model;
+    }
 }
