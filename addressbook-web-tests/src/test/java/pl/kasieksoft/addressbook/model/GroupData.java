@@ -1,5 +1,6 @@
 package pl.kasieksoft.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -9,8 +10,11 @@ import java.util.Objects;
 public class GroupData {
     @XStreamOmitField
     private int id;
+    @Expose
     private final String name;
+    @Expose
     private final String header;
+    @Expose
     private final String footer;
 
     public GroupData(int id, String name, String header, String footer) {
