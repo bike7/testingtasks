@@ -7,7 +7,7 @@ import pl.kasieksoft.addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-    protected static ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+    protected static ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {

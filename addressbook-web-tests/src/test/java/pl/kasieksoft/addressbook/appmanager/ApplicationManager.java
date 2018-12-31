@@ -6,12 +6,15 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-    public static final String APPLICATION_URL = "http://localhost/addressbook/";
-
-    String browser;
+    private final Properties properties;
+    private String browser;
     private WebDriver wd;
 
     private ContactHelper contactHelper;
@@ -21,9 +24,17 @@ public class ApplicationManager {
 
     public ApplicationManager(String browser) {
         this.browser = browser;
+        properties = new Properties();
     }
 
     public void init() {
+        String target = System.getProperty("target", "local");
+
+        try {
+            properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+        } catch (IOException ioe) {
+            System.out.println("File with system properties cannot be reached" + ioe);
+        }
         if (browser.equals(BrowserType.FIREFOX)) {
             wd = new FirefoxDriver();
         } else if (browser.equals(BrowserType.CHROME)) {
@@ -32,12 +43,12 @@ public class ApplicationManager {
             wd = new InternetExplorerDriver();
         }
         wd.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        wd.get(APPLICATION_URL);
+        wd.get(properties.getProperty("web.baseUrl"));
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
         contactHelper = new ContactHelper(wd);
-        sessionHelper.login("admin", "secret");
+        sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
     }
 
     public void stop() {

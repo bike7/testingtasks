@@ -3,10 +3,18 @@ package pl.kasieksoft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
+
 public class NavigationHelper extends HelperBase {
+
+    private final Properties properties;
 
     public NavigationHelper(WebDriver wd) {
         super(wd);
+        properties = new Properties();
     }
 
     public void groupPage() {
@@ -23,7 +31,13 @@ public class NavigationHelper extends HelperBase {
         if (!forceRefresh && isElementPresent(By.id("maintable"))) {
             return;
         }
-        wd.get(ApplicationManager.APPLICATION_URL);
+        String target = System.getProperty("target", "local");
+        try {
+            properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+        } catch (IOException ioe) {
+            System.out.println("File with system properties cannot be reached" + ioe);
+        }
+        wd.get(properties.getProperty("web.baseUrl"));
     }
 
     public void homePage() {

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="pl.kasieksoft.addressbook.tests.GroupDeletionTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2018-12-31T15:50:50" hostname="DESKTOP-DPOIL8C" time="1.036">
+  <properties/>
+  <testcase name="testGroupDeletion" classname="pl.kasieksoft.addressbook.tests.GroupDeletionTests" time="1.036"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
