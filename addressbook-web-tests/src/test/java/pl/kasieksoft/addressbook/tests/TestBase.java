@@ -28,12 +28,12 @@ public class TestBase {
         app.stop();
     }
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod(enabled = false)
     public void logStart(Method m, Object[] p) {
         logger.info("Start test: " + m.getName() + " with parameters " + Arrays.asList(p));
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(enabled = false)
     public void logStop(Method m, Object[] p) {
         logger.info("Finish test:" + m.getName() + " with parameters " + Arrays.asList(p));
     }

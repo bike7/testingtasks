@@ -1,24 +1,64 @@
 package pl.kasieksoft.addressbook.model;
 
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
+    @Id
     private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String bday;
-    private final String bmonth;
-    private final String byear;
-    private final String group;
-    private final String homePhone;
-    private final String mobilePhone;
-    private final String workPhone;
-    private final String allPhones;
-    private final String email;
-    private final String email2;
-    private final String email3;
-    private final String allEmails;
-    private final String address;
+
+    private String firstname;
+    private String lastname;
+
+    @Transient
+    private String bday;
+
+    @Transient
+    private String bmonth;
+
+    @Transient
+    private String byear;
+
+    @Transient
+    private String group;
+
+    @Column(name = "home")
+    @Type(type = "text")
+    private String homePhone;
+
+    @Column(name = "mobile")
+    @Type(type = "text")
+    private String mobilePhone;
+
+    @Column(name = "work")
+    @Type(type = "text")
+    private String workPhone;
+
+    @Transient
+    private String allPhones;
+
+    @Type(type = "text")
+    private String email;
+
+    @Type(type = "text")
+    private String email2;
+
+    @Type(type = "text")
+    private String email3;
+
+    @Transient
+    private String allEmails;
+
+    @Transient
+    @Type(type = "text")
+    private String address;
+
+    private ContactData() {
+    }
 
     public ContactData(int id, String firstname, String lastname, String bday, String bmonth, String byear, String group,
                        String homePhone, String mobilePhone, String workPhone, String allPhones,
