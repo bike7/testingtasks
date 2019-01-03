@@ -5,6 +5,7 @@
         <classes>
             <class name="pl.kasieksoft.addressbook.tests.ContactCreationTests"/>
             <class name="pl.kasieksoft.addressbook.tests.ContactModificationTests"/>
+            <class name="pl.kasieksoft.addressbook.tests.ContactDetailsTests"/>
             <class name="pl.kasieksoft.addressbook.tests.ContactDeletionTests"/>
         </classes>
     </test>
