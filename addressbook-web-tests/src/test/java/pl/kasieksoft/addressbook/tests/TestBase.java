@@ -8,9 +8,15 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import pl.kasieksoft.addressbook.appmanager.ApplicationManager;
+import pl.kasieksoft.addressbook.model.GroupDataBuilder;
+import pl.kasieksoft.addressbook.model.Groups;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class TestBase {
 
@@ -37,4 +43,17 @@ public class TestBase {
     public void logStop(Method m, Object[] p) {
         logger.info("Finish test:" + m.getName() + " with parameters " + Arrays.asList(p));
     }
+
+    public void verifyGroupListInUI() {
+        if (Boolean.getBoolean("verifyUI")) {
+            Groups dbGroups = app.db().groups();
+            Groups uiGroups = app.group().all();
+            assertThat(uiGroups, equalTo(dbGroups.stream()
+                    .map((g) -> GroupDataBuilder.aGroupData().withId(g.getId()).withName(g.getName()).build())
+                    .collect(Collectors.toSet())));
+        }
+
+    }
+
+
 }
