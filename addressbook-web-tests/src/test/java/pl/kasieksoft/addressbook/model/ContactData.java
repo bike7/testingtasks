@@ -3,7 +3,9 @@ package pl.kasieksoft.addressbook.model;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -22,9 +24,6 @@ public class ContactData {
 
     @Transient
     private String byear;
-
-    @Transient
-    private String group;
 
     @Column(name = "home")
     @Type(type = "text")
@@ -57,6 +56,10 @@ public class ContactData {
     @Type(type = "text")
     private String address;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
+
     private ContactData() {
     }
 
@@ -69,7 +72,6 @@ public class ContactData {
         this.bday = bday;
         this.bmonth = bmonth;
         this.byear = byear;
-        this.group = group;
         this.homePhone = homePhone;
         this.mobilePhone = mobilePhone;
         this.workPhone = workPhone;
@@ -109,8 +111,8 @@ public class ContactData {
         return byear;
     }
 
-    public String getGroup() {
-        return group;
+    public Groups getGroups() {
+        return new Groups(groups);
     }
 
     public String getHomePhone() {
