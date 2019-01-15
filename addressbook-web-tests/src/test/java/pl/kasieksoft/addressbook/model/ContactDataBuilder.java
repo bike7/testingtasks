@@ -7,7 +7,7 @@ public final class ContactDataBuilder {
     private String bday;
     private String bmonth;
     private String byear;
-    private String group;
+    private Groups groups = new Groups();
     private String homePhone;
     private String mobilePhone;
     private String workPhone;
@@ -55,8 +55,13 @@ public final class ContactDataBuilder {
         return this;
     }
 
-    public ContactDataBuilder withGroup(String group) {
-        this.group = group;
+    public ContactDataBuilder withGroups(Groups groups) {
+        this.groups = groups;
+        return this;
+    }
+
+    public ContactDataBuilder inGroup(GroupData group) {
+        groups.add(group);
         return this;
     }
 
@@ -106,7 +111,7 @@ public final class ContactDataBuilder {
     }
 
     public ContactData build() {
-        return new ContactData(id, firstname, lastname, bday, bmonth, byear, group, homePhone, mobilePhone, workPhone, allPhones, email, email2, email3, allEmails, address);
+        return new ContactData(id, firstname, lastname, bday, bmonth, byear, groups, homePhone, mobilePhone, workPhone, allPhones, email, email2, email3, allEmails, address);
     }
 
 

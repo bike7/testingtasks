@@ -21,10 +21,14 @@ public class GroupModificationTests extends TestBase {
 
     @Test
     public void testGroupModification() {
-
         Groups before = app.db().groups();
         GroupData modifiedGroup = before.iterator().next();
-        GroupData group = GroupDataBuilder.aGroupData().withId(modifiedGroup.getId()).withName("test1 modified").withHeader("test2 modified").withFooter("test3 modified").build();
+        GroupData group = GroupDataBuilder.aGroupData()
+                .withId(modifiedGroup.getId())
+                .withName("test1 modified")
+                .withHeader("test2 modified")
+                .withFooter("test3 modified")
+                .build();
         app.goTo().groupPage();
         app.group().modify(group);
         assertThat(app.group().count(), equalTo(before.size()));

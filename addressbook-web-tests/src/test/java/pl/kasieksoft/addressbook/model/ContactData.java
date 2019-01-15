@@ -63,7 +63,7 @@ public class ContactData {
     private ContactData() {
     }
 
-    public ContactData(int id, String firstname, String lastname, String bday, String bmonth, String byear, String group,
+    public ContactData(int id, String firstname, String lastname, String bday, String bmonth, String byear, Groups groups,
                        String homePhone, String mobilePhone, String workPhone, String allPhones,
                        String email, String email2, String email3, String allEmails, String address) {
         this.id = id;
@@ -72,6 +72,7 @@ public class ContactData {
         this.bday = bday;
         this.bmonth = bmonth;
         this.byear = byear;
+        this.groups = groups;
         this.homePhone = homePhone;
         this.mobilePhone = mobilePhone;
         this.workPhone = workPhone;
