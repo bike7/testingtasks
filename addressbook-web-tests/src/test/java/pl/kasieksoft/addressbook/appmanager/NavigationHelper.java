@@ -24,7 +24,11 @@ public class NavigationHelper extends HelperBase {
             return;
         }
         click(By.linkText("groups"));
+    }
 
+    public void groupPage(int id) {
+        String currentUrl = wd.getCurrentUrl();
+        wd.get(currentUrl.substring(0, currentUrl.lastIndexOf('/') + 1) + "?group=" + id);
     }
 
     public void homePage(boolean forceRefresh) {

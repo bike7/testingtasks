@@ -8,6 +8,7 @@ import org.testng.Assert;
 import pl.kasieksoft.addressbook.model.ContactData;
 import pl.kasieksoft.addressbook.model.ContactDataBuilder;
 import pl.kasieksoft.addressbook.model.Contacts;
+import pl.kasieksoft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -153,5 +154,14 @@ public class ContactHelper extends HelperBase {
                 .filter((s) -> !s.equals("")).collect(Collectors.toList());
     }
 
+    public void addToGroup(ContactData contact, GroupData group) {
+        selectContact(contact.getId());
+        selectFromDropdown("to_group", group.getName());
+        click(By.name("add"));
+    }
 
+    public void removeFromGroup(ContactData contact) {
+        selectContact(contact.getId());
+        click(By.name("remove"));
+    }
 }
