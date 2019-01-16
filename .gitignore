@@ -39,3 +39,6 @@ target/
 *.rar
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+addressbook-web-tests/build/tmp/testGroups/jar_extract_16569816755902279210_tmp
+addressbook-web-tests/build/tmp/testGroups/jar_extract_4358681649979934026_tmp
+addressbook-web-tests/build/tmp/testGroups/jar_extract_6456687006225884070_tmp

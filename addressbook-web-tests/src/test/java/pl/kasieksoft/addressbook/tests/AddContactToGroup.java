@@ -27,9 +27,8 @@ public class AddContactToGroup extends TestBase {
         GroupData selectedGroup = app.db().groups().iterator().next();
         app.goTo().homePage();
         app.contact().addToGroup(selectedContact, selectedGroup);
-        Contacts after = app.db().contacts();
         HashMap<ContactData, Groups> map = new HashMap<>();
-        for (ContactData contact : after) {
+        for (ContactData contact : app.db().contacts()) {
             map.put(contact, contact.getGroups());
         }
         assertTrue(map.get(selectedContact).contains(selectedGroup));

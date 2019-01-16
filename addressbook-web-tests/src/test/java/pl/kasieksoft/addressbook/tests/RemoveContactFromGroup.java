@@ -29,9 +29,8 @@ public class RemoveContactFromGroup extends TestBase {
         app.contact().addToGroup(selectedContact, selectedGroup);
         app.goTo().groupPage(selectedGroup.getId());
         app.contact().removeFromGroup(selectedContact);
-        Contacts after = app.db().contacts();
         HashMap<ContactData, Groups> map = new HashMap<>();
-        for (ContactData contact : after) {
+        for (ContactData contact : app.db().contacts()) {
             map.put(contact, contact.getGroups());
         }
         assertFalse(map.get(selectedContact).contains(selectedGroup));
