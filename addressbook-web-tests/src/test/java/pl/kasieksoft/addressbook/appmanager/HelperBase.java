@@ -17,7 +17,6 @@ public class HelperBase {
     }
 
     public void type(By locator, String text) {
-        // moznaby sie zastanowic, czy zadziala bez click
         if (text != null) {
             click(locator);
             String existingText = wd.findElement(locator).getAttribute("value");

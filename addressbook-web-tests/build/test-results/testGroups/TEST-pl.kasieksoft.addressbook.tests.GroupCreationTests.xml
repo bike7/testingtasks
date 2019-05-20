@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="pl.kasieksoft.addressbook.tests.GroupCreationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-01-04T16:30:24" hostname="DESKTOP-DPOIL8C" time="4.662">
+<testsuite name="pl.kasieksoft.addressbook.tests.GroupCreationTests" tests="3" skipped="0" failures="0" errors="0" timestamp="2019-05-16T12:33:04" hostname="DESKTOP-DPOIL8C" time="4.506">
   <properties/>
-  <testcase name="testGroupCreation[0](GroupData{id='0', name='test 0'})" classname="pl.kasieksoft.addressbook.tests.GroupCreationTests" time="1.734"/>
-  <testcase name="testGroupCreation[1](GroupData{id='0', name='test 1'})" classname="pl.kasieksoft.addressbook.tests.GroupCreationTests" time="1.475"/>
-  <testcase name="testGroupCreation[2](GroupData{id='0', name='test 2'})" classname="pl.kasieksoft.addressbook.tests.GroupCreationTests" time="1.453"/>
-  <system-out><![CDATA[17:30:24.313 [Test worker] INFO  o.h.h.i.QueryTranslatorFactoryInitiator - HHH000397: Using ASTQueryTranslatorFactory
-Hibernate: select groupdata0_.group_id as group_id1_1_, groupdata0_.group_footer as group_fo2_1_, groupdata0_.group_header as group_he3_1_, groupdata0_.group_name as group_na4_1_ from group_list groupdata0_
-Hibernate: select groupdata0_.group_id as group_id1_1_, groupdata0_.group_footer as group_fo2_1_, groupdata0_.group_header as group_he3_1_, groupdata0_.group_name as group_na4_1_ from group_list groupdata0_
-Hibernate: select groupdata0_.group_id as group_id1_1_, groupdata0_.group_footer as group_fo2_1_, groupdata0_.group_header as group_he3_1_, groupdata0_.group_name as group_na4_1_ from group_list groupdata0_
-Hibernate: select groupdata0_.group_id as group_id1_1_, groupdata0_.group_footer as group_fo2_1_, groupdata0_.group_header as group_he3_1_, groupdata0_.group_name as group_na4_1_ from group_list groupdata0_
-Hibernate: select groupdata0_.group_id as group_id1_1_, groupdata0_.group_footer as group_fo2_1_, groupdata0_.group_header as group_he3_1_, groupdata0_.group_name as group_na4_1_ from group_list groupdata0_
-Hibernate: select groupdata0_.group_id as group_id1_1_, groupdata0_.group_footer as group_fo2_1_, groupdata0_.group_header as group_he3_1_, groupdata0_.group_name as group_na4_1_ from group_list groupdata0_
+  <testcase name="testGroupCreation[0](GroupData{id='0', name='test 0'})" classname="pl.kasieksoft.addressbook.tests.GroupCreationTests" time="1.887"/>
+  <testcase name="testGroupCreation[1](GroupData{id='0', name='test 1'})" classname="pl.kasieksoft.addressbook.tests.GroupCreationTests" time="1.346"/>
+  <testcase name="testGroupCreation[2](GroupData{id='0', name='test 2'})" classname="pl.kasieksoft.addressbook.tests.GroupCreationTests" time="1.271"/>
+  <system-out><![CDATA[14:33:04.600 [Test worker] INFO  o.h.h.i.QueryTranslatorFactoryInitiator - HHH000397: Using ASTQueryTranslatorFactory
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
+Hibernate: select groupdata0_.group_id as group_id1_2_, groupdata0_.group_footer as group_fo2_2_, groupdata0_.group_header as group_he3_2_, groupdata0_.group_name as group_na4_2_ from group_list groupdata0_
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
