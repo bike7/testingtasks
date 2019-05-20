@@ -15,6 +15,8 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
     private final Properties properties;
     private RegistartionHelper registrationHelper;
+    private FtpHelper ftp;
+    private MailHelper mailHelper;
     private SoapHelper soap;
     private String browser;
     private WebDriver wd;
@@ -60,6 +62,20 @@ public class ApplicationManager {
             registrationHelper = new RegistartionHelper(this);
         }
         return registrationHelper;
+    }
+
+    public FtpHelper ftp() {
+        if (ftp == null) {
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
+
+    public MailHelper mail() {
+        if (mailHelper == null) {
+            mailHelper = new MailHelper(this);
+        }
+        return mailHelper;
     }
 
     public WebDriver getDriver() {
