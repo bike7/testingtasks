@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
     private final Properties properties;
     private RegistartionHelper registrationHelper;
+    private SoapHelper soap;
     private String browser;
     private WebDriver wd;
 
@@ -41,6 +42,13 @@ public class ApplicationManager {
 
     public HttpSession newSession() {
         return new HttpSession(this);
+    }
+
+    public SoapHelper soap() {
+        if (soap == null) {
+            soap = new SoapHelper(this);
+        }
+        return soap;
     }
 
     public String getProperty(String key) {
